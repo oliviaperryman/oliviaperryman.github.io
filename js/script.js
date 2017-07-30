@@ -5,6 +5,9 @@
 *
 */
 
+var word = '';
+var width, height, largeHeader, canvas, ctx, points, target, animateHeader = true;
+
 
 $(document).ready(function(){
 	renderHeader();
@@ -12,11 +15,71 @@ $(document).ready(function(){
 });
 
 
+function letterClick(e){
+    if(e.innerText == 'L'){
+        word = 'L';
+    }
+    else{
+        word += e.innerText;
+    }
+
+    if(word == "LOVE"){
+        console.log("I love you");
+        renderHeart();
+    }
+
+}
+
+function renderHeart(){
+    animateHeader = false;
+    heart = [];
+    var p1 = {x: width/2, originX: width/2, y: height/3, originY: height/3};
+    var p2 = {x: width*0.65, originX: width*0.65, y: height/5, originY: height/5};
+    var p3 = {x: width*0.9, originX: width*0.9, y: height/3.5, originY: height/3.5};
+    var p4 = {x: width*0.9, originX: width*0.9, y: height/2, originY: height/2};
+    var p5 = {x: width*0.5, originX: width*0.5, y: height*0.8, originY: height*0.8};
+    var p6 = {x: width*0.1, originX: width*0.1, y: height/2, originY: height/2};
+    var p7 = {x: width*0.1, originX: width*0.1, y: height/3.5, originY: height/3.5};
+    var p8 = {x: width*0.35, originX: width*0.35, y: height/5, originY: height/5};
+    
+
+    p1.closest = [p2];
+    p2.closest = [p3];
+    p3.closest = [p4];
+    p4.closest = [p5];
+    p5.closest = [p6];
+    p6.closest = [p7];
+    p7.closest = [p8];
+    p8.closest = [p1];
+    heart.push(p1);
+    heart.push(p2);
+    heart.push(p3);
+    heart.push(p4);
+    heart.push(p5);
+    heart.push(p6);
+    heart.push(p7);
+    heart.push(p8);
+
+    // assign a circle to each point
+    for(var i in heart) {
+        var c = new Circle(points[i], 2+Math.random()*2, 'rgba(255,255,255,0.5)');
+        heart[i].circle = c;
+    }
+
+    ctx.clearRect(0,0,width,height);
+
+    for(var i in heart) {
+        heart[i].active = 0.2;
+        heart[i].circle.active = 0.6;
+        heart[i].circle.draw();
+        TweenLite.to(heart[i], 1, {width:10, height:10});
+        drawLines(heart[i]);
+    }
+
+}
+
 
 function renderHeader(){
-	var width, height, largeHeader, canvas, ctx, points, target, animateHeader = true;
-	var count = 0;
-
     // Main
     initHeader();
     initAnimation();
@@ -81,12 +144,15 @@ function renderHeader(){
             var c = new Circle(points[i], 2+Math.random()*2, 'rgba(255,255,255,0.3)');
             points[i].circle = c;
         }
+
+
     }
 
     // Event handling
     function addListeners() {
         if(!('ontouchstart' in window)) {
             window.addEventListener('mousemove', mouseMove);
+            canvas.addEventListener('mousedown', mouseDown);
         }
         window.addEventListener('scroll', scrollCheck);
         window.addEventListener('resize', resize);
@@ -105,6 +171,11 @@ function renderHeader(){
         }
         target.x = posx;
         target.y = posy;
+    }
+
+    function mouseDown(e){
+        animateHeader = !animateHeader;
+        //canvas.hidden = !canvas.hidden;
     }
 
     function scrollCheck() {
@@ -155,8 +226,6 @@ function renderHeader(){
     }
 
     function shiftPoint(p) {
-    	if(count < 10){return;}
-    	count++;
         TweenLite.to(p, 1+1*Math.random(), {x:p.originX-50+Math.random()*100,
             y: p.originY-50+Math.random()*100, ease:Circ.easeInOut,
             onComplete: function() {
@@ -164,39 +233,41 @@ function renderHeader(){
             }});
     }
 
-    // Canvas manipulation
-    function drawLines(p) {
-        if(!p.active) return;
-        for(var i in p.closest) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p.closest[i].x, p.closest[i].y);
-            ctx.strokeStyle = 'rgba(156,217,249,'+ p.active+')';
-            ctx.stroke();
-        }
-    }
 
-    function Circle(pos,rad,color) {
-        var _this = this;
-
-        // constructor
-        (function() {
-            _this.pos = pos || null;
-            _this.radius = rad || null;
-            _this.color = color || null;
-        })();
-
-        this.draw = function() {
-            if(!_this.active) return;
-            ctx.beginPath();
-            ctx.arc(_this.pos.x, _this.pos.y, _this.radius, 0, 2 * Math.PI, false);
-            ctx.fillStyle = 'rgba(156,217,249,'+ _this.active+')';
-            ctx.fill();
-        };
-    }
 
     // Util
     function getDistance(p1, p2) {
         return Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2);
+    }
+}
+
+function Circle(pos,rad,color) {
+    var _this = this;
+
+    // constructor
+    (function() {
+        _this.pos = pos || null;
+        _this.radius = rad || null;
+        _this.color = color || null;
+    })();
+
+    this.draw = function() {
+        if(!_this.active) return;
+        ctx.beginPath();
+        ctx.arc(_this.pos.x, _this.pos.y, _this.radius, 0, 2 * Math.PI, false);
+        ctx.fillStyle = 'rgba(256,256,256,'+ _this.active+')';
+        ctx.fill();
+    };
+}
+
+// Canvas manipulation
+function drawLines(p) {
+    if(!p.active) return;
+    for(var i in p.closest) {
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p.closest[i].x, p.closest[i].y);
+        ctx.strokeStyle = 'rgba(256,256,256,'+ p.active+')';
+        ctx.stroke();
     }
 }
