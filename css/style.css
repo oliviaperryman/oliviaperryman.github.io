@@ -1,16 +1,21 @@
 .large-header {
-	position: relative;
-	width: 100%;
-	background: black;
-	overflow: hidden;
-	background-size: cover;
-	background-position: center center;
-	z-index: 1;
-}
-
-.large-header {
 	background-image: url('../img/stars.jpg');
 	background-size: 100% 100%;
+
+ 	padding-left: 0 !important;
+ 	padding-right: 0 !important;
+
+	background-image: url('../img/stars.jpg');
+
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+.navbar-header {
+	padding-left: 15px;
+    padding-right: 15px;
 }
 
 .main-title {
@@ -38,3 +43,23 @@
 	font-family: "Courier New"
 }
 
+.section-title {
+	font-size: 50px;
+	font-family: "Times New Roman";
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	text-align: center;
+	color: white;
+
+}
+
+.section {
+	background: navy;
+	background-size: 100% 100%;
+}
+
+#profile {
+	margin: 50px;
+	width: 30%;
+	height: 30%;
+}

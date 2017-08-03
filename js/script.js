@@ -226,7 +226,7 @@ function renderHeader(){
     }
 
     function shiftPoint(p) {
-        TweenLite.to(p, 1+1*Math.random(), {x:p.originX-50+Math.random()*100,
+        TweenLite.to(p, 2+1*Math.random(), {x:p.originX-50+Math.random()*100,
             y: p.originY-50+Math.random()*100, ease:Circ.easeInOut,
             onComplete: function() {
                 shiftPoint(p);
