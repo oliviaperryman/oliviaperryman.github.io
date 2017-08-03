@@ -1,0 +1,26 @@
+{
+  "name": "npm-init",
+  "version": "1.0.0",
+  "description": "Olivia's personal website",
+  "main": "script.js",
+  "dependencies": {
+    "express": "^4.15.3",
+    "body-parser": "^1.15.2",
+    "dotenv": "^2.0.0",
+    "watson-developer-cloud": "^2.31.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oliviaperryman/oliviaperryman.github.io.git"
+  },
+  "author": "Olivia Perryman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oliviaperryman/oliviaperryman.github.io/issues"
+  },
+  "homepage": "https://github.com/oliviaperryman/oliviaperryman.github.io#readme"
+}
