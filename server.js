@@ -7,6 +7,6 @@ var app = express();
 app.use(express.static('.'));
 app.use(bodyParser.json());
 
-app.listen(3000, function(){
-  console.log("Server running on port 3000");
+app.listen(8000, function(){
+  console.log("Server running on port 8000");
 });
