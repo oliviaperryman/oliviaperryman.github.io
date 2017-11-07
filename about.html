@@ -17,7 +17,13 @@
 </head>
 
 <body>
-	<div class="container-fluid">
-		<h1> 'Olivia is first and foremost an Explorer.'' </h1>
+	<div id="nav-placeholder"><script src="js/navigation.js"></script></div>
+	<div class="content" style="padding-top:50px; margin: 100px">
+		<div id="description-placeholder"> </div>
+		<script>
+			$.get("aboutme-description.html", function(data){
+			    $("#description-placeholder").append(data);
+			});
+		</script>
 	</div>
 </body>
