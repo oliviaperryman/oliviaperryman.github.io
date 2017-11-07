@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 
 app.listen(8000, function(){
   console.log("Server running on port 8000");
+<<<<<<< HEAD
 });
 
 // Create the service wrapper
@@ -47,6 +48,8 @@ app.post('/api/message', function(req, res) {
     }
     return res.json(updateMessage(payload, data));
   });
+=======
+>>>>>>> 0fb743516e0f29b27f467c45949a51d0bbe6906c
 });
 
 /**
