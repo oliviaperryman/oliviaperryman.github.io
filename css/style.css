@@ -9,6 +9,17 @@
 
 }
 
+.large-header-mountains {
+	background-image: url('../img/mountains.jpg');
+	background-size: 100% 100%;
+
+ 	padding-left: 0 !important;
+ 	padding-right: 0 !important;
+
+	background-image: url('../img/mountains.jpg');
+
+}
+
 .container-fluid {
     padding: 0;
 }
