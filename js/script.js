@@ -1,9 +1,3 @@
-//prompt("Hello");
-
-/**
-*
-*
-*/
 
 var word = '';
 var width, height, largeHeader, canvas, ctx, points, target, animateHeader = true;
@@ -41,7 +35,7 @@ function renderHeart(){
     var p6 = {x: width*0.1, originX: width*0.1, y: height/2, originY: height/2};
     var p7 = {x: width*0.1, originX: width*0.1, y: height/3.5, originY: height/3.5};
     var p8 = {x: width*0.35, originX: width*0.35, y: height/5, originY: height/5};
-    
+
 
     p1.closest = [p2];
     p2.closest = [p3];

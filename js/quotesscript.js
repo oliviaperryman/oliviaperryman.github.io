@@ -1,6 +1,3 @@
-
-
-
 $(document).ready(function(){
   $.get("titles.html", function(data){
       $("#quotes-list").append(data);
@@ -14,8 +11,6 @@ $(document).ready(function(){
                   .delay(2000)
                   .fadeOut(2000, showNextQuote);
           }
-
           showNextQuote();
     });
-
 });
